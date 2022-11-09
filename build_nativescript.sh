@@ -14,14 +14,14 @@ xcodebuild -project v8ios.xcodeproj \
            -configuration Release clean \
            -quiet
 
-checkpoint "Building NativeScript for Mac Catalyst"
-xcodebuild archive -project v8ios.xcodeproj \
-                   -scheme "NativeScript" \
-                   -configuration Release \
-                   -destination "platform=macOS,variant=Mac Catalyst" \
-                   -quiet \
-                   SKIP_INSTALL=NO \
-                   -archivePath $DIST/intermediates/NativeScript.maccatalyst.xcarchive
+# checkpoint "Building NativeScript for Mac Catalyst"
+# xcodebuild archive -project v8ios.xcodeproj \
+#                    -scheme "NativeScript" \
+#                    -configuration Release \
+#                    -destination "platform=macOS,variant=Mac Catalyst" \
+#                    -quiet \
+#                    SKIP_INSTALL=NO \
+#                    -archivePath $DIST/intermediates/NativeScript.maccatalyst.xcarchive
 
 # checkpoint "Building for x86_64 iphone simulator"
 # xcodebuild archive -project v8ios.xcodeproj \
@@ -88,8 +88,6 @@ checkpoint "Creating NativeScript.xcframework"
 OUTPUT_DIR="$DIST/NativeScript.xcframework"
 rm -rf $OUTPUT_DIR
 xcodebuild -create-xcframework \
-           -framework "$DIST/intermediates/NativeScript.maccatalyst.xcarchive/Products/Library/Frameworks/NativeScript.framework" \
-           -debug-symbols "$DIST/intermediates/NativeScript.maccatalyst.xcarchive/dSYMs/NativeScript.framework.dSYM" \
            -framework "$DIST/intermediates/NativeScript.iphonesimulator.xcarchive/Products/Library/Frameworks/NativeScript.framework" \
            -debug-symbols "$DIST/intermediates/NativeScript.iphonesimulator.xcarchive/dSYMs/NativeScript.framework.dSYM" \
            -framework "$DIST/intermediates/NativeScript.iphoneos.xcarchive/Products/Library/Frameworks/NativeScript.framework" \
